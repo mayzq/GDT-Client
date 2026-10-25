@@ -327,17 +327,27 @@
           </dl>
         </div>
 
+        <label for="language-select">
+          Idioma / Language
+          <select id="language-select">
+            <option value="pt-BR">Português (Brasil)</option>
+            <option value="en">English</option>
+          </select>
+        </label>
+
         <div id="tabs" role="tablist">
-          <button type="button" role="tab" id="tab-login" aria-selected="true" aria-controls="login-form">Log in</button>
-          <button type="button" role="tab" id="tab-signup" aria-selected="false" aria-controls="signup-form">Create account</button>
+          <button type="button" role="tab" id="tab-login" aria-selected="true" aria-controls="login-form" data-i18n="login">Log in</button>
+          <button type="button" role="tab" id="tab-signup" aria-selected="false" aria-controls="signup-form" data-i18n="signup">Create account</button>
         </div>
 
         <form id="login-form" autocomplete="off" role="tabpanel" aria-labelledby="tab-login">
           <ul id="saved" aria-label="Remembered accounts"></ul>
-          <label>Username
+          <label>
+            <span data-i18n="username">Username</span>
             <input id="username" type="text" maxlength="100" spellcheck="false" autofocus>
           </label>
-          <label>Password
+          <label>
+            <span data-i18n="password">Password</span>
             <input id="password" type="password" maxlength="100">
           </label>
           <div id="code-part" hidden>
@@ -346,8 +356,8 @@
             </label>
             <label class="check"><input id="remember-device" type="checkbox"> Trust this device for 30 days</label>
           </div>
-          <label class="check"><input id="remember" type="checkbox"> Remember me</label>
-          <button id="log-in" class="main" type="submit">Log in</button>
+          <label class="check"><input id="remember" type="checkbox"><span data-i18n="remember">Remember me</span></label>
+          <button id="log-in" class="main" type="submit" data-i18n="login">Log in</button>
           <p id="status" class="status" role="status"></p>
           <p class="links"><a href="#" id="manage-account">Manage Account</a> &middot; <a href="#" id="commands-login">Custom Commands</a></p>
           <p class="links"><a href="#" id="terms-login">Terms</a> &middot; <a href="#" id="privacy-login">Privacy</a></p>
@@ -495,6 +505,63 @@
       "use strict";
 
       const $ = id => document.getElementById(id);
+
+      const translations = {
+        en: {
+          login: "Log in",
+          signup: "Create account",
+          username: "Username",
+          password: "Password",
+          remember: "Remember me"
+        },
+        "pt-BR": {
+          login: "Entrar",
+          signup: "Criar conta",
+          username: "Nome de usuário",
+          password: "Senha",
+          remember: "Lembrar de mim"
+        }
+      };
+
+
+      const applyLanguage = (language) => {
+        const selectedLanguage = translations[language]
+          ? language
+          : "en";
+
+        document.documentElement.lang = selectedLanguage;
+
+        document.querySelectorAll("[data-i18n]").forEach(element => {
+          const key = element.dataset.i18n;
+          const translation = translations[selectedLanguage][key];
+
+          if (translation !== undefined) {
+            element.textContent = translation;
+          }
+        });
+      };
+
+      const LANGUAGE_KEY = "launcher-language";
+      const languageSelect = $("language-select");
+
+      const savedLanguage = localStorage.getItem(LANGUAGE_KEY);
+
+      const initialLanguage = translations[savedLanguage]
+        ? savedLanguage
+        : "pt-BR";
+
+      languageSelect.value = initialLanguage;
+      applyLanguage(initialLanguage);
+
+      languageSelect.addEventListener("change", () => {
+        const language = languageSelect.value;
+
+        applyLanguage(language);
+        localStorage.setItem(LANGUAGE_KEY, language);
+      });
+
+
+
       const SAVED_FIELDS = ["server", "account-type", "guide", "starting-room", "start-in-den", "start-muted", "allow-unencrypted"];
       const SETTINGS_KEY = "advanced";
       // "Remember me": the server's sign-in token for each remembered account,
