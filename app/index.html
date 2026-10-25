@@ -366,23 +366,31 @@
         <form id="signup-form" autocomplete="off" role="tabpanel" aria-labelledby="tab-signup" hidden>
           <div id="step-animal">
             <div id="animals" role="radiogroup" aria-label="Your first animal"></div>
-            <button id="signup-next" class="main" type="button" disabled>Next</button>
+            <button id="signup-next" class="main" type="button" disabled data-i18n="next">Next</button>
           </div>
           <div id="step-account" hidden>
             <p id="picked"><img id="picked-art" alt=""><span id="picked-name"></span><button id="signup-back" type="button">Change</button></p>
-            <label>Username
-              <input id="new-username" type="text" maxlength="20" spellcheck="false">
+            <label>
+              <label><span data-i18n="username">Username</span><input id="new-username" type="text" maxlength="20" spellcheck="false"></label>
             </label>
-            <label>Password
-              <input id="new-password" type="password" maxlength="100">
+            <label>
+
+            <label><span data-i18n="password">Password</span><input id="new-password" type="password" maxlength="100"></label>
+
             </label>
-            <label>Password again
-              <input id="new-confirm" type="password" maxlength="100">
+            <label>
+
+            <label><span data-i18n="confirmPassword">Confirm password</span><input id="new-confirm" type="password" maxlength="100"></label>
+
             </label>
-            <label class="check"><input id="new-remember" type="checkbox"> Remember me</label>
-            <label class="check agree"><input id="new-agreed" type="checkbox">
-              <span>I am 18 or older, and old enough in my country to agree to this myself. I agree to the <a href="#" id="terms-signup">Terms of Service</a> and the <a href="#" id="privacy-signup">Privacy Policy</a>.</span></label>
-            <button id="sign-up" class="main" type="submit">Create account</button>
+
+          <label class="check"><input id="new-remember" type="checkbox"><span data-i18n="remember">Remember me</span></label>
+
+
+            <label class="check agree"><input id="new-agreed" type="checkbox"><span><span data-i18n="signupAge">I am 18 or older, and old enough in my country to agree to this myself.</span> <span data-i18n="signupAgree">I agree to the</span> <a href="#" id="terms-signup" data-i18n="signupTerms">Terms of Service</a> <span data-i18n="signupAnd">and the</span> <a href="#" id="privacy-signup" data-i18n="signupPrivacy">Privacy Policy</a>.</span></label>
+
+            <button id="sign-up" class="main" type="submit" data-i18n="signup">Create account</button>
+
           </div>
           <p id="signup-status" class="status" role="status"></p>
         </form>
@@ -506,20 +514,35 @@
 
       const $ = id => document.getElementById(id);
 
+
       const translations = {
         en: {
           login: "Log in",
           signup: "Create account",
           username: "Username",
           password: "Password",
-          remember: "Remember me"
+          remember: "Remember me",
+          next: "Next",
+          confirmPassword: "Confirm password",
+          signupAge: "I am 18 or older, and old enough in my country to agree to this myself.",
+          signupAgree: "I agree to the",
+          signupTerms: "Terms of Service",
+          signupAnd: "and the",
+          signupPrivacy: "Privacy Policy"
         },
         "pt-BR": {
           login: "Entrar",
           signup: "Criar conta",
           username: "Nome de usuário",
           password: "Senha",
-          remember: "Lembrar de mim"
+          remember: "Lembrar de mim",
+          next: "Próximo",
+          confirmPassword: "Confirmar senha",
+          signupAge: "Tenho 18 anos ou mais e idade suficiente, de acordo com as leis do meu país, para aceitar estes termos por conta própria.",
+          signupAgree: "Concordo com os",
+          signupTerms: "Termos de Serviço",
+          signupAnd: "e com a",
+          signupPrivacy: "Política de Privacidade"
         }
       };
 
