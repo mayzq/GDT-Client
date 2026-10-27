@@ -110,7 +110,7 @@ verificar_marcador:
 
 verificar_processos:
     ; Verificar se existe algum Mico.exe em execucao
-    nsExec::Exec /TIMEOUT=15000 'powershell.exe -NoProfile -NonInteractive -Command "if (Get-Process -Name Mico -ErrorAction SilentlyContinue) { exit 2 } else { exit 0 }"'
+    nsExec::Exec /TIMEOUT=15000 'powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$INSTDIR\resources\app\mico-process-check.ps1" -ExecutablePath "$INSTDIR\Mico.exe"'
     Pop $0
 
     StrCmp $0 "0" remover_mico
