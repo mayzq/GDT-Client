@@ -3,6 +3,7 @@
 const {app} = require("electron");
 const fs = require("fs");
 const path = require("path");
+const { userDataFolder } = require("./mico-config")(__dirname);
 
 // what the client starts with: the newest copy of this folder the computer
 // has. an installed build keeps the copy it came with and fetches newer ones
@@ -20,7 +21,7 @@ app.commandLine.appendSwitch("aj-no-updates");
 
 // the same data folder main.js uses
 if (!app.commandLine.hasSwitch("user-data-dir")) {
-  app.setPath("userData", path.join(app.getPath("appData"), "Mico Preview"));
+  app.setPath("userData", path.join(app.getPath("appData"), userDataFolder));
 }
 const UPDATES = path.join(app.getPath("userData"), "updates");
 const STAGED = path.join(UPDATES, "current.json");

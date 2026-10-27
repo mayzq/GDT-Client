@@ -3,6 +3,7 @@
 const {app, BrowserWindow, ipcMain, net, session, shell, webContents} = require("electron");
 const fs = require("fs");
 const path = require("path");
+const { userDataFolder } = require("./mico-config")(global.burrow ? global.burrow.shipped : __dirname);
 const device = require("./device.js");
 const discord = require("./discord.js");
 const log = require("./log.js");
@@ -23,7 +24,7 @@ const updater = require("./updater.js");
 // (Not when the caller chose the folder itself, --user-data-dir.)
 if (!app.commandLine.hasSwitch("user-data-dir")) {
 
-  app.setPath("userData", path.join(app.getPath("appData"), "Mico Preview"));
+  app.setPath("userData", path.join(app.getPath("appData"), userDataFolder));
 
 }
 
