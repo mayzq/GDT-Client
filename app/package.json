@@ -1,8 +1,8 @@
 {
-    "name": "aj-private-client",
-    "productName": "Burrow",
-    "version": "1.4.0",
-    "description": "The client for the Burrow private server",
-    "main": "boot.js",
-    "license": "UNLICENSED"
+  "name": "aj-private-client",
+  "productName": "Mico",
+  "version": "1.4.0",
+  "description": "The desktop client for the Mico private server",
+  "main": "boot.js",
+  "license": "UNLICENSED"
 }

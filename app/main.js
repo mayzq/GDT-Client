@@ -414,7 +414,7 @@ ipcMain.handle("captcha", (event, serverUrl, action) => new Promise(resolve => {
     maximizable: false,
     fullscreenable: false,
     backgroundColor: "#000000",
-    title: "Burrow",
+    title: "Mico",
     icon: path.join(__dirname, "icon.png"),
     webPreferences: {
       contextIsolation: true,
