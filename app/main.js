@@ -22,7 +22,9 @@ const updater = require("./updater.js");
 // change of name.
 // (Not when the caller chose the folder itself, --user-data-dir.)
 if (!app.commandLine.hasSwitch("user-data-dir")) {
-  app.setPath("userData", path.join(app.getPath("appData"), "AJ Private Client"));
+
+  app.setPath("userData", path.join(app.getPath("appData"), "Mico Preview"));
+
 }
 
 // burrow:// links: the server's account page asks the client to sign it in
@@ -769,10 +771,11 @@ app.whenReady().then(() => {
   // an installed copy answers burrow:// links (the installers say so too;
   // this keeps it so after an update or a move). a copy run from the
   // repository leaves them to the installed one.
-  if (builtFor() && !app.isDefaultProtocolClient(LINK_PROTOCOL)) {
-    app.setAsDefaultProtocolClient(LINK_PROTOCOL);
-  }
-  if (builtFor() && global.burrow) {
+    // Mico Preview:
+  // O registro automatico de burrow:// foi desativado.
+  // Futuramente, poderemos implementar mico://
+  // quando houver suporte adequado no servidor.
+  if (builtFor() && global.burrow && !app.commandLine.hasSwitch("aj-no-updates")) {
     updates = updater.start({
       server: builtFor(),
       shell: global.burrow.shell,

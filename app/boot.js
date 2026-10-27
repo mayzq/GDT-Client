@@ -15,11 +15,12 @@ const path = require("path");
 
 const SHELL = 1;
 
-global.burrow = {shipped: __dirname, shell: SHELL, app: __dirname};
+// Mico Preview: nao carregar atualizacoes automaticas.
+app.commandLine.appendSwitch("aj-no-updates");
 
 // the same data folder main.js uses
 if (!app.commandLine.hasSwitch("user-data-dir")) {
-  app.setPath("userData", path.join(app.getPath("appData"), "AJ Private Client"));
+  app.setPath("userData", path.join(app.getPath("appData"), "Mico Preview"));
 }
 const UPDATES = path.join(app.getPath("userData"), "updates");
 const STAGED = path.join(UPDATES, "current.json");
@@ -61,7 +62,13 @@ const chosen = (() => {
   }
   return __dirname;
 })();
-global.burrow.app = chosen;
+
+global.burrow = {
+  shipped: __dirname,
+  shell: SHELL,
+  app: chosen
+};
+
 
 try {
   require(path.join(chosen, "main.js"));
