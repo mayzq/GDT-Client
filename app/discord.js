@@ -166,17 +166,28 @@ const set = info => {
     }
     return;
   }
+    // Inicio da sessao em segundos Unix.
+  const start = Number.isFinite(info.start)
+    ? info.start
+    : Date.now();
+
   const activity = {
-    details: "Playing Burrow",
-    timestamps: {start: Number.isFinite(info.start) ? Math.floor(info.start) : Date.now()},
-    assets: {large_image: "burrow", large_text: "Burrow"},
+    details: "Jogando Mico",
+    timestamps: {
+      start: Math.floor(start > 1e11 ? start / 1000 : start)
+    },
+    assets: {
+      large_image: "mico",
+      large_text: "Mico Launcher"
+    },
     instance: false,
+
   };
   if (typeof info.state === "string" && info.state.trim().length >= 2) {
     activity.state = info.state.trim().slice(0, 100);
   }
   if (typeof info.url === "string" && /^https:\/\/[^\s]{1,200}$/.test(info.url)) {
-    activity.buttons = [{label: "Play Burrow", url: info.url}];
+    activity.buttons = [{label: "Conhecer o Mico", url: info.url}];
   }
   wanted = {appId, activity};
   if (socket && socketAppId !== appId) {

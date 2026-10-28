@@ -1180,16 +1180,21 @@
         }
       };
 
-      // Discord rich presence (discord.js), while the game is open: the
-      // server's Discord application (flashvars discordAppId), where the
-      // player is and since when they have played.
+
       const showPresence = state => {
-        if (!session || !session.flashVars || !session.flashVars.discordAppId) {
+        if (!session) {
           return;
         }
-        session.presenceState = state || session.presenceState || "";
-        window.client.presence({appId: session.flashVars.discordAppId, state: session.presenceState,
-          start: session.since || Date.now(), url: session.flashVars.presenceUrl});
+
+        session.presenceState =
+          state || session.presenceState || "Explorando Jamaa";
+
+        window.client.presence({
+          appId: "1565012265436975104",
+          state: session.presenceState,
+          start: session.since || Date.now(),
+          url: session.flashVars && session.flashVars.presenceUrl
+        });
       };
 
       const closeGame = message => {
